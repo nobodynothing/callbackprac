@@ -1,0 +1,7 @@
+function setReminder(alarmTime, fn) {
+  var currentTime = new Date();
+  var interval = alarmTime.getTime() - currentTime.getTime();
+  setTimeout(fn, interval);
+}
+
+module.exports={setReminder: setReminder};

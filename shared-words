@@ -1,0 +1,43 @@
+#!/usr/bin/env node
+
+var fs = require ('fs');
+var commander = require('../modulepractice/node_modules/commander');
+
+commander
+  .option('-h, --help', 'output usage information')
+  .option('-V, --version', 'output the version number')
+  .option('-n, --number', 'Report just the number of words')
+  .option('-v, --verbose',  'Be more verbose report timing information')
+  .parse(process.argv);
+
+var filenames = commander.args;
+var file1 = commander.args[0];
+var file2 = commander.args[1];
+var contentsArray1 = [];
+var contentsArray2 = [];
+var sharedWords = [];
+
+
+  fs.readFile(file1, {encoding: 'utf8'}, function(
+    error, contents) {
+      contentsArray1 = contents.split('');
+      fs.readFile(file2, {encoding: 'utf8'}, function(
+        error, contents) {
+          contentsArray2 = contents.split('');
+      for (var i = 0; i < contentsArray1.length; i++) {
+        for (var j = 0; j < contentsArray2.length; j++) {
+          if (contentsArray1[i] === contentsArray2[j]) {
+            sharedWords.push(contentsArray1[i]);
+
+          }
+        }
+      }console.log(sharedWords);
+}
+);
+});
+
+//file1 becomes an array
+//file2 becomes an array
+//each invidivual string in the array is compared to each string
+//in the other array.
+//console prints common strings
